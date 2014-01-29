@@ -18,8 +18,7 @@ public class Matrix {
 			FileReader fr = new FileReader(matDat);
 			buffRead = new BufferedReader(fr);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Datei nicht gefunden");
 		}
 		
 		int[] size = null;
@@ -52,7 +51,7 @@ public class Matrix {
 					i++;
 				}
 			} catch (Exception e) {
-				
+				System.out.println("Keine Matrix angegeben");
 			}			
 		}
 		
@@ -150,10 +149,6 @@ public class Matrix {
  		try {
  			dimensions[0] = Integer.parseInt(temp[0]);
  			dimensions[1] = Integer.parseInt(temp[1]);
-
- 			if ( !(dimensions[0] == dimensions[1] )) {
- 				throw new Exception();
- 			}
  		}
  		catch ( Exception e ) {
  			System.out.println("Sie Haben falsche Angaben im Datei-Headder gemacht");
