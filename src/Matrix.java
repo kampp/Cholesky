@@ -9,11 +9,12 @@ public class Matrix {
 	}
 	
  	public Matrix(int zeilen, int spalten) {
-	 
+ 		 
  		mat = new Vector[spalten];
  		
  		while ( spalten != 0 ) {
  			mat[spalten] = new Vector(zeilen);
+ 			spalten--;
  		}
  	}
  	
@@ -27,11 +28,23 @@ public class Matrix {
  	}
  	
  	public double[] zeile(int _zeile) {
+ 		int i =0;
+ 		double[] temp = new double[mat.length-1];
  		
+ 		while ( i < mat.length ) {
+ 			temp[i] = (double)mat[i].get(_zeile);
+ 			i++;
+ 		}
+ 		return temp;
  	}
  	
  	public double[] spalte(int _spalte) {
-	 
+ 		int i =0;
+ 		double[] temp = new double[mat.length-1];
+ 		
+ 		while ( i < mat.length ) {
+ 			temp[i] = 
+ 		}
  	}
  	
  	public int hoehe() {
