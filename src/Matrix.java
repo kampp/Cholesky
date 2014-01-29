@@ -7,7 +7,8 @@ import java.util.Vector;
 
 public class Matrix { 
 	
-	Vector[] mat;
+	@SuppressWarnings("rawtypes")
+	Vector mat;
 	
 	public Matrix(String dateiname) {
 		File matDat = new File(dateiname);
@@ -29,9 +30,9 @@ public class Matrix {
 		}	
 		int i =0;
 		
-		mat = new Vector[size[1]];;
+		mat = new Vector(size[1]);
 		while ( i < size[1] ) {
-			mat[i] = new Vector(size[0]);
+			mat.add(i, new Vector(size[0]) );
 			i++;
 		}
 		
@@ -43,7 +44,7 @@ public class Matrix {
 				if ( (temp = buffRead.readLine()) != null ) {
 					tempLine = readLinen(temp);
 					for ( int j = 0; j < size[1]; j++) { // spalten durchgehen
-						setElement(i,j, tempLine[j]);
+						addElement(i,j, tempLine[j]);
 					}
 				i++;
 				}
@@ -59,30 +60,40 @@ public class Matrix {
 	
  	public Matrix(int zeilen, int spalten) {
  		 
- 		mat = new Vector[spalten];
+ 		mat = new Vector(spalten);
  		
  		while ( spalten != 0 ) {
- 			mat[spalten] = new Vector(zeilen);
+ 			mat.add(spalten, new Vector(zeilen) );
  			spalten--;
  		}
  	}
  	
  	public void setElement(int zeile, int spalte, double wert) {
- 		mat[spalte].set(zeile, wert);
+ 		Vector temp = (Vector) mat.get(spalte);
+ 		temp.set(zeile, wert);
+ 		mat.set(spalte, temp);
+ 		
+ 	}
+ 	
+ 	private void addElement(int zeile, int spalte, double wert) {
+ 		Vector temp = (Vector) mat.get(spalte);
+ 		temp.add(zeile, wert);
+ 		mat.set(spalte, temp);
  		
  	}
  	
  	public double getElement(int zeile, int spalte) {
- 		return (double) mat[spalte].get(zeile);
+ 		Vector temp = (Vector)  mat.get(spalte);
+ 		return (double) temp.get(zeile);
  	}
  	
  	public double[] zeile(int _zeile) {
  		int i =0;
- 		double[] temp = new double[mat.length-1];
+ 		double[] temp = new double[mat.size()];
  		
  		
- 		while ( i < mat.length ) {
- 			temp[i] = (double)mat[i].get(_zeile);
+ 		while ( i < mat.size() ) {
+ 			temp[i] = getElement(_zeile, i);
  			i++;
  		}
  		return temp;
@@ -90,12 +101,12 @@ public class Matrix {
  	
  	public double[] spalte(int _spalte) {
  		int i =0;
- 		double[] temp = new double[mat.length-1];
+ 		double[] temp = new double[mat.size()-1];
  		
- 		while ( i < mat.length ) {
+ 		while ( i < mat.size() ) {
  			int j =0;
- 			while ( j < mat[i].size() ) {
- 				temp[i] = (double)mat[i].get(j);
+ 			while ( j < ( (Vector)mat.get(i) ).size() ) {
+ 				temp[i] = (double)( (Vector)mat.get(j) ).get(i);
  				j++;
  			} 				
  			i++;
@@ -104,11 +115,11 @@ public class Matrix {
  	}
  	
  	public int hoehe() {
- 		return mat[0].size();
+ 		return ((Vector)mat.get(0)).size();
  	}
  	
  	public int breite() {
- 		return mat.length;
+ 		return mat.size();
  	}
  	
  	public String toString() {
@@ -117,7 +128,6 @@ public class Matrix {
  		for ( int i =0; i < breite(); i++ ) {
  			for ( int j = 0; j < hoehe(); j++ ) {
  				temp += getElement(j,i);
- 				System.out.println("bla");
  				temp += " ";
  			}
  			temp += "\n";
