@@ -57,7 +57,7 @@ public class Cholesky {
 				}
 			}
 		}
-		Ct = C.transponierte();
+		//Ct = C.transponierte();
 		
 		// Ct * y = b	Vektor y berechnen		Bsp dim=3
 		for (int z=dim-1; z>=0; z--){		//z: 2 bis 0

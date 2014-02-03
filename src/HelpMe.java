@@ -4,8 +4,12 @@ public class HelpMe {
 	public static void main(String[] args) {
 		Matrix A1 = new Matrix("Testmatrizen/A1.txt");
 		Matrix b1 = new Matrix("Testmatrizen/b1.txt");
+
 		System.out.println(A1.toString());
 		System.out.println(b1.toString());
+		System.out.println("transponierte");
+		Matrix b3=b1.transponierte();
+		//System.out.println(b3.toString());
 		Matrix b2 = new Matrix("Testmatrizen/b2.txt");
 		System.out.println(b2.toString());
 		
