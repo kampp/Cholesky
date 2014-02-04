@@ -139,21 +139,6 @@ public class Matrix {
  	}
  	
  	public Matrix transponierte() {
- 		Vector tmp=(Vector)mat.get(0);
- 		System.out.println("Zeilen: "+mat.size());
- 		System.out.println("Spalten: "+tmp.size());
- 		Matrix matr=new Matrix(tmp.size(),mat.size());//spalte, zeile, urspr: zeile, spalte
- 		int spalten=0;
- 		while(spalten != tmp.size()){
- 	 		int zeilen=0;
- 	 		while(zeilen != mat.size()){ //durchläuft alle zeilen der neuen matrix
- 	 			matr.setElement(zeilen, spalten, getElement(spalten, zeilen));
- 	 			zeilen++;
- 	 		}
- 	 		spalten++;
- 		}
- 		
- 		return matr;
 	 
  	}
  	
